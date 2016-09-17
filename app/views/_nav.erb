@@ -1,0 +1,18 @@
+<nav>
+  <ul>
+    <% if logged_in? %>
+    <li ><a href="/">Home</a></li>
+    <li ><a href="/users/<%= current_user.id %>"><%= current_user.username.capitalize %></a></li>
+    <li >
+      <form action="/sessions/logout" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" value="Submit">Logout</button>
+      </form>
+    </li>
+    <% else %>
+    <li><a href="/">Home</a></li>
+    <li><a href="/sessions/new">Log in</a></li>
+    <li><a href="/users/new">Register</a></li>
+    <% end %>
+  </ul>
+</nav>

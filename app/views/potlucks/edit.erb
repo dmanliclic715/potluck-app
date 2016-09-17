@@ -1,0 +1,15 @@
+<h1>Edit this Potluck</h1>
+  <%= erb :"_errors", layout: false, locals: {errors: @errors} %>
+    <form action="/potlucks/<%= @potluck.id %>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <label for="name">Potluck Name:</label>
+      <input type="text" name="name" value="<%= @potluck.name %>">
+      <br>
+      <label for="location">Location:</label>
+      <input type="text" name="location" value="<%= @potluck.location %>">
+      <br>
+      <label for="time">Date and Time(YYYY-MM-DD HH:MM):</label>
+      <input type="text" name="time" value="<%= @potluck.time %>">
+      <br>
+      <input type="submit" value="Edit Potluck">
+    </form>

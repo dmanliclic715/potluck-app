@@ -1,0 +1,17 @@
+<h1>Potlucks</h1>
+  <% if logged_in? %>
+  <a href="/potlucks/new">Add Potluck</a>
+  <% end %>
+  <ul>
+    <% if @potlucks %>
+      <% @potlucks.each do |potluck| %>
+      <li><a href="/potlucks/<%= potluck.id %>"><%= potluck.name %></a></li>
+        <ul>
+          <li> <%= potluck.time.strftime("%B %d, %Y") %> at <%= potluck.location %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </ul>
+  <% if logged_in? %>
+  <a href="/potlucks/new">Add Potluck</a>
+  <% end %>

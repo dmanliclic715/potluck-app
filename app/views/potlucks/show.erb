@@ -1,0 +1,40 @@
+<h1>Welcome to <%= @potluck.name %>!</h1>
+  <p>Location: <%= @potluck.location %></p>
+  <p>Date: <%= @potluck.time.strftime("%B %d, %Y") %></p>
+  <p>Time: <%= @potluck.time.strftime("%I:%M")%></p>
+  <p>Host: <%= @potluck.host.username %> </p>
+  <p>
+    <h2> Attendances </h2>
+      <% if @potluck.attendances %>
+        <% @potluck.attendances.each do |attendance| %>
+          <p>
+            <strong>Attendee:</strong> <%= attendance.guest.username %>
+            <br>
+            <%= attendance.dish %>
+          </p>
+        <% end %>
+      <% end %>
+      <% if logged_in? && (session[:user_id] == @potluck.user_id) %>
+      <ul>
+        <li><a href="/potlucks/<%= @potluck.id%>/edit">Edit</a></li>
+        <li>
+          <form action="/potlucks/<%= @potluck.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      </ul>
+      <% end %>
+      <div>
+        <% if logged_in? && !(session[:user_id] == @potluck.user_id) %>
+        <h2>Bring a Dish and Attend a Potluck(Unless You're Avner)</h2>
+          <%= erb :"_errors", layout: false, locals: {errors: @errors} %>
+          <form action="/potlucks/<%= @potluck.id %>/attendances" method="post">
+            <label for="dish">Dish:</label>
+            <input type="text" name="dish" placeholder="Dish to bring">
+            <button type="submit">Submit Dish</button>
+          </form>
+        <% elsif !logged_in? %>
+          <a href="/sessions/new">Sign in to post Attend this potluck</a>
+        <% end %>
+      <div>

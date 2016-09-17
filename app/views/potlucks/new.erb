@@ -1,0 +1,14 @@
+<h1>Add a Potluck</h1>
+  <%= erb :"_errors", layout: false, locals: {errors: @errors} %>
+    <form action="/potlucks" method="post">
+      <label for="name">Potluck Name:</label>
+      <input type="text" name="name" placeholder="Potluck Name">
+      <br>
+      <label for="location">Location:</label>
+      <input type="text" name="location" placeholder="Location">
+      <br>
+      <label for="time">Date and Time(YYYY-MM-DD HH:MM):</label>
+      <input type="text" name="time" placeholder="YYYY-MM-DD HH:MM">
+      <br>
+      <input type="submit" value="Add Potluck">
+    </form>
